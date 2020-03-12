@@ -7,14 +7,13 @@
         <div>
             <h3>{{ postData.title }}</h3>
 
-            <p><b> - First name: </b>{{ postData.first_name }}</p>
-
-            <p><b> - Last name:</b> {{ postData.last_name }}</p>
-
-            <p>{{ postData.content }}</p>
+        <p><b> - First name:</b>{{ postData.author.first_name }}</p>
+		<p><b> - Last name:</b>{{ postData.author.last_name }}</p>
+                   
+        <p>{{ postData.content }}</p>
 
             
         </div>
-        {% endfor %}
+    {% endfor %}
 
 {% endblock body_content %}
