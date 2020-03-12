@@ -4,7 +4,7 @@ from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
 # define routes for / & /home, this function will be called when these are accessed
 from application.models import Posts , Users
-from application.forms import PostForm, RegistrationForm, LoginForm
+from application.forms import PostForm, RegistrationForm, LoginForm, UpdateAccountForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -85,3 +85,18 @@ def logout():
 	return redirect(url_for('login'))
 
 
+@app.route('/account', methods=['GET', 'POST'])
+@login_required
+def account():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.last_name.data
+        current_user.email = form.email.data
+        db.session.commit()
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.first_name.data = current_user.first_name
+        form.last_name.data = current_user.last_name        
+        form.email.data = current_user.email        
+    return render_template('account.html', title='Account', form=form)
