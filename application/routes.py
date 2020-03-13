@@ -1,8 +1,5 @@
-# import render_template function from the flask module
 from flask import render_template, redirect, url_for, request
-# import the app object from the ./application/__init__.py
 from application import app, db, bcrypt
-# define routes for / & /home, this function will be called when these are accessed
 from application.models import Posts , Users
 from application.forms import PostForm, RegistrationForm, LoginForm, UpdateAccountForm
 from flask_login import login_user, current_user, logout_user, login_required
