@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from application.models import Users
+from flask_login import current_user
 
 class PostForm(FlaskForm):
     title = StringField('Title',
@@ -70,10 +71,38 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Email already in use')
 
 class LoginForm(FlaskForm):
+<<<<<<< HEAD
+=======
+	email = StringField('Email',
+		validators=[
+			DataRequired(),
+			Email()
+		])
+	password = PasswordField('Password',
+		validators=[
+			DataRequired(),
+		])
+	remember = BooleanField('Remember Me')
+    
+	submit = SubmitField('Login')
+
+class UpdateAccountForm(FlaskForm):
+    first_name = StringField('First Name',
+        validators=[
+            DataRequired(),
+            Length(min=2, max=30)
+        ])
+    last_name = StringField('Last Name',
+        validators=[
+            DataRequired(),
+            Length(min=2, max=30)
+        ])
+>>>>>>> development
     email = StringField('Email',
         validators=[
             DataRequired(),
             Email()
+<<<<<<< HEAD
         ]
     )
 
@@ -82,6 +111,16 @@ class LoginForm(FlaskForm):
             DataRequired()
         ]
     )
+=======
+        ])
+    submit = SubmitField('Update')
+
+    def validate_email(self,email):
+        if email.data != current_user.email:
+            user = Users.query.filter_by(email=email.data).first()
+            if user:
+                raise ValidationError('Email already in use')
+>>>>>>> development
 
     remember = BooleanField('Remember Me')
     

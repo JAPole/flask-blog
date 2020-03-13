@@ -1,4 +1,3 @@
-# import Flask class from the flask module
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import getenv
@@ -8,10 +7,16 @@ from flask_login import LoginManager
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
+<<<<<<< HEAD
 
 
 app.config['SECRET_KEY'] = getenv('SECRET_KEY')
+=======
+>>>>>>> development
 app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URI')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = getenv('SECRET_KEY')
+
 db = SQLAlchemy(app)
 
 login_manager = LoginManager(app)
