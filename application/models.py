@@ -22,17 +22,6 @@ class Posts(db.Model):
 
 class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(50), nullable=False, unique=True)
-    password = db.Column(db.String(500), nullable=False)
-
-    def __repr__(self):
-        return ''.join([
-           'User ID: ', self.user_id, '\r\n',
-           'Title: ', self.title, '\r\n', self.content
-    ])
-
-class Users(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(30), nullable=False)
     last_name = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(150), nullable=False, unique=True)
